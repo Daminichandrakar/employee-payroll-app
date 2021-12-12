@@ -33,9 +33,10 @@ public class EmployeeService {
         return employeeEntity;
     }
 
-    public EmployeeEntity addEmployee(EmployeeDto employeeDto) {
+    public String addEmployee(EmployeeDto employeeDto) {
         EmployeeEntity employeeEntity = modelMapper.map(employeeDto, EmployeeEntity.class);
-        return employeeRepository.save(employeeEntity);
+         employeeRepository.save(employeeEntity);
+          return "Employee Added Successfully";
     }
 
     public EmployeeEntity updateEmployee(int id, EmployeeDto employeeDTO) {

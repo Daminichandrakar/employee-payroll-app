@@ -17,12 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Purpose : To implement CustomGlobalExceptionHandler in atm-system
- *
- * @author : DAMINI CHANDRAKAR
- * @since : 03-12-2021
- */
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -75,26 +69,12 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
      * @return : response entity of object type and status
      */
     @ExceptionHandler
-    public ResponseEntity<Object> handleAtmCustomException(EmployeeCustomException e) {
+    public ResponseEntity<ErrorResponse> handleAtmCustomException(EmployeeCustomException e) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
         errorResponse.setErrors(e.getMessage());
         errorResponse.setTimestamp(new Date());
-        return new ResponseEntity<Object>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
-    /**
-     * Purpose : To handle all exception
-     *
-     * @param e : e used for Exception
-     * @return : response entity of object type and status
-     */
-//    @ExceptionHandler(Exception.class)
-//    public final ResponseEntity<Object> handleAllExceptions(Exception e) {
-//        ErrorResponse errorResponse = new ErrorResponse();
-//        errorResponse.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-//        errorResponse.setErrors("Card Number should be uniqe");
-//        errorResponse.setTimestamp(new Date());
-//        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
 }
