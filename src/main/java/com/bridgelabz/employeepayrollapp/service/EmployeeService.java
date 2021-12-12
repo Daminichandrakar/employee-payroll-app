@@ -49,7 +49,7 @@ public class EmployeeService {
     public String  deleteEmployee(int id) {
         EmployeeEntity atmEntity = getEmployeeById(id);
           employeeRepository.delete(atmEntity);
-        return "deleted";
+        return "Employee Deleted Successfully";
     }
 
 }

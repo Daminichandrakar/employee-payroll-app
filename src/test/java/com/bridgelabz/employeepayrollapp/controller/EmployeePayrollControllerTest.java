@@ -62,7 +62,7 @@ public class EmployeePayrollControllerTest {
 
    @Test
     void givenEmployeeDto_whenCalledAddEmployeeMethod_shouldReturnSuccessMessage() {
-        String successString = "Atm Added Successfully";
+        String successString = "Employee Added Successfully";
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName("Damini");
         employeeDto.setGender("F");
@@ -78,7 +78,7 @@ public class EmployeePayrollControllerTest {
 
     @Test
     void givenEmployeeDto_whenCalledUpdateEmployeeMethod_shouldReturnSuccessMessage() {
-        String successString = "Atm Update Successfully";
+        String successString = "Employee Update Successfully";
         int id = 1;
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName("Damini");
@@ -90,6 +90,15 @@ public class EmployeePayrollControllerTest {
         employeeDto.setImagePath("a.jpg");
         when(employeeService.updateEmployee(id ,employeeDto)).thenReturn(successString);
         String actualResponseString = employeePayRollController.update(1,employeeDto);
+        assertEquals(successString, actualResponseString);
+    }
+
+    @Test
+    void givenId_whenCalledDeleteEmployeeMethod_shouldReturnSuccessMessage() {
+        String successString = "Employee Delete Successfully";
+        int id = 1;
+        when(employeeService.deleteEmployee(id)).thenReturn(successString);
+        String actualResponseString = employeePayRollController.delete(1);
         assertEquals(successString, actualResponseString);
     }
 
