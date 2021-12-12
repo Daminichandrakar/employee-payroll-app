@@ -28,7 +28,7 @@ public class EmployeePayRollController {
     }
 
     @PutMapping(value = "/update/{id}")
-    public EmployeeEntity update(@PathVariable(value = "id") int id, @Valid @RequestBody EmployeeDto atmDto) {
+    public String update(@PathVariable(value = "id") int id, @Valid @RequestBody EmployeeDto atmDto) {
         return employeeService.updateEmployee(id, atmDto);
     }
 
