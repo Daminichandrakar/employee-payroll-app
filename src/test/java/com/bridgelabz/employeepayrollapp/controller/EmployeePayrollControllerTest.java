@@ -59,4 +59,20 @@ public class EmployeePayrollControllerTest {
             assertEquals(employeeList.get(i).getImagePath(), actualResponse.get(i).getImagePath());
         }
     }
+
+   @Test
+    void givenEmployeeDto_whenCalledAddEmployeeMethod_shouldReturnSuccessMessage() {
+        String successString = "Atm Added Successfully";
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setName("Damini");
+        employeeDto.setGender("F");
+        employeeDto.setDepartment("It");
+        employeeDto.setSalary("15000");
+        employeeDto.setStartDate(new Date());
+        employeeDto.setNotes("Welcome to it department");
+        employeeDto.setImagePath("a.jpg");
+        when(employeeService.addEmployee(employeeDto)).thenReturn(successString);
+        String actualResponseString = employeePayRollController.addEmployee(employeeDto);
+        assertEquals(successString, actualResponseString);
+    }
 }
