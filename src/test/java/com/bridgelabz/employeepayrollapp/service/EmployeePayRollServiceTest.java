@@ -168,7 +168,6 @@ public class EmployeePayRollServiceTest {
 
     @Test
     void givenDeleteEmployeeMethodIsCalledWithAnId_ShouldDeleteTheDataOfThatId() {
-        int id = 1;
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setEmployeeId(1);
         employeeEntity.setName("Damini");
@@ -179,9 +178,24 @@ public class EmployeePayRollServiceTest {
         employeeEntity.setNotes("Welcome to it department");
         employeeEntity.setImagePath("a.jpg");
 
-        when(employeeRepository.findById(id)).thenReturn(Optional.of(employeeEntity));
-        String actualMessage = employeePayRollService.deleteEmployee(id);
+        when(employeeRepository.findById(employeeEntity.getEmployeeId())).thenReturn(Optional.of(employeeEntity));
+        String actualMessage = employeePayRollService.deleteEmployee(employeeEntity.getEmployeeId());
         assertEquals("Employee Deleted Successfully", actualMessage);
         verify(employeeRepository, times(1)).delete(employeeEntity);
+    }
+
+    @Test
+    void whenDeleteEmployeeMethodIsCalled_IfIdNotFound_shouldThrowExceptionMessage() {
+        EmployeeEntity employeeEntity = new EmployeeEntity();
+        employeeEntity.setEmployeeId(1);
+        employeeEntity.setName("Damini");
+        employeeEntity.setGender("F");
+        employeeEntity.setDepartment("It");
+        employeeEntity.setSalary(15000);
+        employeeEntity.setStartDate(new Date());
+        employeeEntity.setNotes("Welcome to it department");
+        employeeEntity.setImagePath("a.jpg");
+        when(employeeRepository.findById(employeeEntity.getEmployeeId())).thenReturn(Optional.empty());
+        assertThrows(EmployeeCustomException.class, () -> employeePayRollService.deleteEmployee(employeeEntity.getEmployeeId()));
     }
 }
