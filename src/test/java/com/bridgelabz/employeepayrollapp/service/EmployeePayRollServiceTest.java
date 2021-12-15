@@ -112,4 +112,40 @@ public class EmployeePayRollServiceTest {
         assertEquals("Employee Added Successfully", actualStringMessage);
         verify(employeeRepository, times(1)).save(employeeEntity);
     }
+
+    @Test
+    void whenUpdateEmployeeMethodIsCalled_ShouldUpdateEmployeeDetailsAndReturnSuccessMessage() {
+        int id = 1;
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setName("Damini");
+        employeeDto.setGender("F");
+        employeeDto.setDepartment("It");
+        employeeDto.setSalary(15000);
+        employeeDto.setStartDate(new Date());
+        employeeDto.setNotes("Welcome to it department");
+        employeeDto.setImagePath("a.jpg");
+
+        EmployeeEntity employeeEntity= new EmployeeEntity();
+        employeeEntity.setEmployeeId(1);
+        employeeEntity.setName("Damini");
+        employeeEntity.setGender("F");
+        employeeEntity.setDepartment("It");
+        employeeEntity.setSalary(15000);
+        employeeEntity.setStartDate(new Date());
+        employeeEntity.setNotes("Welcome to it department");
+        employeeEntity.setImagePath("a.jpg");
+
+        when(employeeRepository.findById(id)).thenReturn(Optional.of(employeeEntity));
+        employeeEntity.setName(employeeDto.getName());
+        employeeEntity.setGender(employeeDto.getGender());
+        employeeEntity.setDepartment(employeeDto.getDepartment());
+
+        when(employeePayRollBuilder.buildEmployeeEntity(employeeDto,employeeEntity)).thenReturn(employeeEntity);
+        String actualSuccessMessage = employeePayRollService.updateEmployee(id,employeeDto);
+        verify(employeeRepository,times(1)).save(employeeEntity);
+        assertEquals("Employee Updated Successfully", actualSuccessMessage);
+        assertEquals(employeeDto.getName(),employeeEntity.getName());
+
+    }
+
 }
