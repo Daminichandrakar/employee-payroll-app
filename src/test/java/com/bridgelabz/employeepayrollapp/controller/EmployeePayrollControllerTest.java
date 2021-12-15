@@ -1,12 +1,11 @@
 package com.bridgelabz.employeepayrollapp.controller;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
-import com.bridgelabz.employeepayrollapp.service.EmployeeService;
+import com.bridgelabz.employeepayrollapp.service.EmployeePayRollService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class EmployeePayrollControllerTest {
     private EmployeePayRollController employeePayRollController;
 
     @Mock
-    private EmployeeService employeeService;
+    private EmployeePayRollService employeePayRollService;
 
     @Test
     void given2EmployeeDto_whenCalledGetAllMethod_shouldReturnListOfEmployeeDto() {
@@ -48,7 +47,7 @@ public class EmployeePayrollControllerTest {
         employeeDto1.setNotes("Welcome to it department");
         employeeList.add(employeeDto1);
 
-        when(employeeService.employees()).thenReturn(employeeList);
+        when(employeePayRollService.employeeList()).thenReturn(employeeList);
         List<EmployeeDto> actualResponse = employeePayRollController.getAll();
         for (int i = 0; i < actualResponse.size(); i++) {
             assertEquals(employeeList.get(i).getName(), actualResponse.get(i).getName());
@@ -71,8 +70,8 @@ public class EmployeePayrollControllerTest {
         employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
-        when(employeeService.addEmployee(employeeDto)).thenReturn(successString);
-        String actualResponseString = employeePayRollController.addEmployee(employeeDto);
+        when(employeePayRollService.addEmployee(employeeDto)).thenReturn(successString);
+        String actualResponseString = employeePayRollController.add(employeeDto);
         assertEquals(successString, actualResponseString);
     }
 
@@ -88,7 +87,7 @@ public class EmployeePayrollControllerTest {
         employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
-        when(employeeService.updateEmployee(id ,employeeDto)).thenReturn(successString);
+        when(employeePayRollService.updateEmployee(id ,employeeDto)).thenReturn(successString);
         String actualResponseString = employeePayRollController.update(1,employeeDto);
         assertEquals(successString, actualResponseString);
     }
@@ -97,8 +96,8 @@ public class EmployeePayrollControllerTest {
     void givenId_whenCalledDeleteEmployeeMethod_shouldReturnSuccessMessage() {
         String successString = "Employee Delete Successfully";
         int id = 1;
-        when(employeeService.deleteEmployee(id)).thenReturn(successString);
-        String actualResponseString = employeePayRollController.delete(1);
+        when(employeePayRollService.deleteEmployee(id)).thenReturn(successString);
+        String actualResponseString = employeePayRollController.delete(id);
         assertEquals(successString, actualResponseString);
     }
 

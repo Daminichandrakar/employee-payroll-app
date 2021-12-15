@@ -65,7 +65,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     /**
      * Purpose : To handle method level exception
      *
-     * @param e : e used for AtmCustom Exception
+     * @param e : e used for EmployeeCustom Exception
      * @return : response entity of object type and status
      */
     @ExceptionHandler
@@ -76,5 +76,4 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         errorResponse.setTimestamp(new Date());
         return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.NOT_FOUND);
     }
-
 }
