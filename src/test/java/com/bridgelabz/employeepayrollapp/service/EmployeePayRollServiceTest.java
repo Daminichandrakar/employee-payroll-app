@@ -55,7 +55,8 @@ public class EmployeePayRollServiceTest {
         employeeEntity1.setSalary(15000);
         employeeEntity1.setStartDate(new Date());
         employeeEntity1.setNotes("Welcome to it department");
-        employeeEntity1.setImagePath("a.jpg");;
+        employeeEntity1.setImagePath("a.jpg");
+        ;
         employeeList.add(employeeEntity1);
 
         List<EmployeeDto> employeeResponseList = new ArrayList<>();
@@ -125,7 +126,7 @@ public class EmployeePayRollServiceTest {
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
 
-        EmployeeEntity employeeEntity= new EmployeeEntity();
+        EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setEmployeeId(1);
         employeeEntity.setName("Damini");
         employeeEntity.setGender("F");
@@ -140,12 +141,28 @@ public class EmployeePayRollServiceTest {
         employeeEntity.setGender(employeeDto.getGender());
         employeeEntity.setDepartment(employeeDto.getDepartment());
 
-        when(employeePayRollBuilder.buildEmployeeEntity(employeeDto,employeeEntity)).thenReturn(employeeEntity);
-        String actualSuccessMessage = employeePayRollService.updateEmployee(id,employeeDto);
-        verify(employeeRepository,times(1)).save(employeeEntity);
+        when(employeePayRollBuilder.buildEmployeeEntity(employeeDto, employeeEntity)).
+                thenReturn(employeeEntity);
+        String actualSuccessMessage = employeePayRollService.updateEmployee(id, employeeDto);
+        verify(employeeRepository, times(1)).save(employeeEntity);
         assertEquals("Employee Updated Successfully", actualSuccessMessage);
-        assertEquals(employeeDto.getName(),employeeEntity.getName());
-
+        assertEquals(employeeDto.getName(), employeeEntity.getName());
     }
 
+    @Test
+    void whenUpdateEmployeeMethodIsCalled_IfNotFoundId_shouldThrowExceptionMessage() {
+        int id = 1;
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setName("Damini");
+        employeeDto.setGender("F");
+        employeeDto.setDepartment("It");
+        employeeDto.setSalary(15000);
+        employeeDto.setStartDate(new Date());
+        employeeDto.setNotes("Welcome to it department");
+        employeeDto.setImagePath("a.jpg");
+
+        when(employeeRepository.findById(id)).thenReturn(Optional.empty());
+        assertThrows(EmployeeCustomException.class, () -> employeePayRollService.
+                updateEmployee(id, employeeDto));
+    }
 }
