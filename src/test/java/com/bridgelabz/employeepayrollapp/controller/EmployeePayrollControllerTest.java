@@ -31,7 +31,7 @@ public class EmployeePayrollControllerTest {
         employeeDto.setName("Damini");
         employeeDto.setGender("F");
         employeeDto.setDepartment("It");
-        employeeDto.setSalary("15000");
+        employeeDto.setSalary(15000);
         employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
@@ -41,7 +41,7 @@ public class EmployeePayrollControllerTest {
         employeeDto1.setName("Siva");
         employeeDto1.setGender("M");
         employeeDto1.setDepartment("It");
-        employeeDto1.setSalary("15000");
+        employeeDto1.setSalary(15000);
         employeeDto1.setStartDate(new Date());
         employeeDto1.setImagePath("b.jpg");
         employeeDto1.setNotes("Welcome to it department");
@@ -66,7 +66,7 @@ public class EmployeePayrollControllerTest {
         employeeDto.setName("Damini");
         employeeDto.setGender("F");
         employeeDto.setDepartment("It");
-        employeeDto.setSalary("15000");
+        employeeDto.setSalary(15000);
         employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
@@ -83,7 +83,7 @@ public class EmployeePayrollControllerTest {
         employeeDto.setName("Damini");
         employeeDto.setGender("F");
         employeeDto.setDepartment("It");
-        employeeDto.setSalary("15000");
+        employeeDto.setSalary(15000);
         employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
@@ -100,5 +100,4 @@ public class EmployeePayrollControllerTest {
         String actualResponseString = employeePayRollController.delete(id);
         assertEquals(successString, actualResponseString);
     }
-
 }

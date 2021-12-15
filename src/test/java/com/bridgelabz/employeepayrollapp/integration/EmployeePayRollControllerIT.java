@@ -57,7 +57,7 @@ public class EmployeePayRollControllerIT {
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName("Damini");
         employeeDto.setGender("Female");
-        employeeDto.setSalary("15000");
+        employeeDto.setSalary(15000);
         employeeDto.setDepartment("It");
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");

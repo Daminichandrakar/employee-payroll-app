@@ -14,7 +14,7 @@ public class EmployeeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employeeId;
     private String name;
-    private int salary;
+    private double salary;
     private String gender;
     private Date startDate;
     private String department;

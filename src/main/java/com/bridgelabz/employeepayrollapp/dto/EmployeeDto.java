@@ -3,6 +3,7 @@ package com.bridgelabz.employeepayrollapp.dto;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
@@ -23,8 +24,8 @@ public class EmployeeDto {
     private String name;
 
     @NotNull
-    @Pattern(regexp = "^[0-9]{5,}", message = "salary should be more than 10000")
-    private String salary;
+    @Min(value = 10000, message = "Minimum wage should be more than 10000")
+    private double salary;
 
     @NotNull
     @Pattern(regexp = "^(?:m|M|male|Male|f|F|female|Female|o|O|Other|other)$", message = "Please type gender F - female " +
@@ -32,7 +33,6 @@ public class EmployeeDto {
     private String gender;
 
     @NotNull
-    @CreationTimestamp
     private Date startDate;
 
     @NotNull
