@@ -37,4 +37,14 @@ public class EmployeePayRollControllerIT {
         mockMvc.perform(MockMvcRequestBuilders.get("/employee/get-all"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void addEmployeeTest() throws Exception {
+        when(employeePayRollService.addEmployee(any())).thenReturn("success");
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/employee/add")
+                        .content("{\"name\": \"Siva\",\"salary\":10000,\"gender\": \"male\",\"startDate\": \"2011-01-02\",\"department\": \"IT\", \"notes\": \"Department\",\"imagePath\": \"a.jpg\"}")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk());
+    }
 }
