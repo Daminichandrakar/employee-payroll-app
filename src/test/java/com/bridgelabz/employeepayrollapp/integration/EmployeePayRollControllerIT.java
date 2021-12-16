@@ -67,4 +67,13 @@ public class EmployeePayRollControllerIT {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    void deleteEmployeeTest() throws Exception {
+        when(employeePayRollService.deleteEmployee(1)).thenReturn("success");
+        mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/employee/delete/1")
+                        .content("{\"name\": \"Siva\",\"salary\":10000,\"gender\": \"male\",\"startDate\": \"2011-01-02\",\"department\": \"IT\", \"notes\": \"Department\",\"imagePath\": \"a.jpg\"}")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk());
+    }
 }
