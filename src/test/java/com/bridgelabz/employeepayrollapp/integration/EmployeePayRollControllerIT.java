@@ -47,4 +47,24 @@ public class EmployeePayRollControllerIT {
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void updateEmployeeTest() throws Exception {
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setName("Damini");
+        employeeDto.setGender("Female");
+        employeeDto.setSalary(15000);
+        employeeDto.setDepartment("It");
+        employeeDto.setNotes("Welcome to it department");
+        employeeDto.setImagePath("a.jpg");
+        employeeDto.setStartDate(new Date());
+        int id = 1;
+        when(employeePayRollService.updateEmployee(id,employeeDto)).thenReturn("success");
+        mockMvc.perform(MockMvcRequestBuilders
+                        .put("/employee/update/1")
+                        .content("{\"name\": \"Siva\",\"salary\":10000,\"gender\": \"male\",\"startDate\": \"2011-01-02\",\"department\": \"IT\", \"notes\": \"Department\",\"imagePath\": \"a.jpg\"}")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk());
+    }
+
 }
