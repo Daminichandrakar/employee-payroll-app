@@ -20,7 +20,6 @@ public class EmployeePayrollControllerTest {
 
     @InjectMocks
     private EmployeePayRollController employeePayRollController;
-
     @Mock
     private EmployeePayRollService employeePayRollService;
 

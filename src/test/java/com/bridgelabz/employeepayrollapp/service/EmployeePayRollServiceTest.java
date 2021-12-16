@@ -7,7 +7,6 @@ import com.bridgelabz.employeepayrollapp.exception.EmployeeCustomException;
 import com.bridgelabz.employeepayrollapp.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -168,6 +167,7 @@ public class EmployeePayRollServiceTest {
 
     @Test
     void givenDeleteEmployeeMethodIsCalledWithAnId_ShouldDeleteTheDataOfThatId() {
+        int id = 1;
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setEmployeeId(1);
         employeeEntity.setName("Damini");
@@ -178,14 +178,15 @@ public class EmployeePayRollServiceTest {
         employeeEntity.setNotes("Welcome to it department");
         employeeEntity.setImagePath("a.jpg");
 
-        when(employeeRepository.findById(employeeEntity.getEmployeeId())).thenReturn(Optional.of(employeeEntity));
-        String actualMessage = employeePayRollService.deleteEmployee(employeeEntity.getEmployeeId());
+        when(employeeRepository.findById(id)).thenReturn(Optional.of(employeeEntity));
+        String actualMessage = employeePayRollService.deleteEmployee(id);
         assertEquals("Employee Deleted Successfully", actualMessage);
         verify(employeeRepository, times(1)).delete(employeeEntity);
     }
 
     @Test
     void whenDeleteEmployeeMethodIsCalled_IfIdNotFound_shouldThrowExceptionMessage() {
+        int id = 1;
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setEmployeeId(1);
         employeeEntity.setName("Damini");
@@ -195,7 +196,8 @@ public class EmployeePayRollServiceTest {
         employeeEntity.setStartDate(new Date());
         employeeEntity.setNotes("Welcome to it department");
         employeeEntity.setImagePath("a.jpg");
-        when(employeeRepository.findById(employeeEntity.getEmployeeId())).thenReturn(Optional.empty());
-        assertThrows(EmployeeCustomException.class, () -> employeePayRollService.deleteEmployee(employeeEntity.getEmployeeId()));
+        when(employeeRepository.findById(id)).thenReturn(Optional.empty());
+        assertThrows(EmployeeCustomException.class, () -> employeePayRollService.deleteEmployee(id));
     }
+
 }
