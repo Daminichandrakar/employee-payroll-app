@@ -21,10 +21,9 @@ public class EmployeePayrollBuilderTest {
 
     @InjectMocks
     private EmployeePayRollBuilder employeePayRollBuilder;
-    private ModelMapper modelMapper;
 
     @Test
-    void name() {
+    void givenEmployeeDto_whenNeedToCovertEmployeeDtoToEmployeeEntity_shouldReturnEmployeeEntity() {
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName("Damini");
         employeeDto.setGender("Female");
@@ -37,6 +36,11 @@ public class EmployeePayrollBuilderTest {
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity = employeePayRollBuilder.buildEmployeeEntity(employeeDto,employeeEntity);
         assertEquals(employeeDto.getName(),employeeEntity.getName());
-
+        assertEquals(employeeDto.getGender(),employeeEntity.getGender());
+        assertEquals(employeeDto.getDepartment(),employeeEntity.getDepartment());
+        assertEquals(employeeDto.getImagePath(),employeeEntity.getImagePath());
+        assertEquals(employeeDto.getSalary(),employeeEntity.getSalary());
+        assertEquals(employeeDto.getNotes(),employeeEntity.getNotes());
+        assertEquals(employeeDto.getStartDate(),employeeEntity.getStartDate());
     }
 }

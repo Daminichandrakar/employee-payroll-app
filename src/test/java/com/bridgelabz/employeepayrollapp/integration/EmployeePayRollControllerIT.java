@@ -43,7 +43,9 @@ public class EmployeePayRollControllerIT {
         when(employeePayRollService.addEmployee(any())).thenReturn("success");
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/employee/add")
-                        .content("{\"name\": \"Siva\",\"salary\":10000,\"gender\": \"male\",\"startDate\": \"2011-01-02\",\"department\": \"IT\", \"notes\": \"Department\",\"imagePath\": \"a.jpg\"}")
+                        .content("{\"name\": \"Siva\",\"salary\":10000,\"gender\": \"male\"," +
+                                "\"startDate\": \"2011-01-02\",\"department\": \"IT\", \"notes\": " +
+                                "\"Department\",\"imagePath\": \"a.jpg\"}")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
@@ -62,7 +64,9 @@ public class EmployeePayRollControllerIT {
         when(employeePayRollService.updateEmployee(id,employeeDto)).thenReturn("success");
         mockMvc.perform(MockMvcRequestBuilders
                         .put("/employee/update/1")
-                        .content("{\"name\": \"Siva\",\"salary\":10000,\"gender\": \"male\",\"startDate\": \"2011-01-02\",\"department\": \"IT\", \"notes\": \"Department\",\"imagePath\": \"a.jpg\"}")
+                        .content("{\"name\": \"Siva\",\"salary\":10000,\"gender\": \"male\"," +
+                                "\"startDate\": \"2011-01-02\",\"department\": \"IT\", \"notes\": " +
+                                "\"Department\",\"imagePath\": \"a.jpg\"}")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
@@ -72,7 +76,9 @@ public class EmployeePayRollControllerIT {
         when(employeePayRollService.deleteEmployee(1)).thenReturn("success");
         mockMvc.perform(MockMvcRequestBuilders
                         .delete("/employee/delete/1")
-                        .content("{\"name\": \"Siva\",\"salary\":10000,\"gender\": \"male\",\"startDate\": \"2011-01-02\",\"department\": \"IT\", \"notes\": \"Department\",\"imagePath\": \"a.jpg\"}")
+                        .content("{\"name\": \"Siva\",\"salary\":10000,\"gender\": \"male\"," +
+                                "\"startDate\": \"2011-01-02\",\"department\": \"IT\", \"notes\": " +
+                                "\"Department\",\"imagePath\": \"a.jpg\"}")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
