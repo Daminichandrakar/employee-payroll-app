@@ -23,7 +23,7 @@ public class EmployeePayRollBuilder {
     /**
      * Purpose : To convert employee dto into employee entity.
      *
-     * @param employeeDto : employee dto which is to be converted.
+     * @param employeeDto    : employee dto which is to be converted.
      * @param employeeEntity : employee entity which will be overwritten.
      * @return employeePayroll : converted employee entity
      */

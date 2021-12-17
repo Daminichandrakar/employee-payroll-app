@@ -38,6 +38,7 @@ public class EmployeePayrollControllerTest {
         employeeDto.setGender("F");
         employeeDto.setDepartments(List.of("It"));
         employeeDto.setSalary(15000);
+        employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
         employeeList.add(employeeDto);
@@ -47,6 +48,7 @@ public class EmployeePayrollControllerTest {
         employeeDto1.setGender("M");
         employeeDto1.setDepartments(List.of("It"));
         employeeDto1.setSalary(15000);
+        employeeDto1.setStartDate(new Date());
         employeeDto1.setImagePath("b.jpg");
         employeeDto1.setNotes("Welcome to it department");
         employeeList.add(employeeDto1);
@@ -72,6 +74,7 @@ public class EmployeePayrollControllerTest {
         employeeDto.setGender("F");
        employeeDto.setDepartments(List.of("It"));
         employeeDto.setSalary(15000);
+        employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
         when(employeePayRollService.addEmployee(employeeDto)).thenReturn(successString);
@@ -88,6 +91,7 @@ public class EmployeePayrollControllerTest {
         employeeDto.setGender("F");
         employeeDto.setDepartments(List.of("It"));
         employeeDto.setSalary(15000);
+        employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
         when(employeePayRollService.updateEmployee(id ,employeeDto)).thenReturn(successString);

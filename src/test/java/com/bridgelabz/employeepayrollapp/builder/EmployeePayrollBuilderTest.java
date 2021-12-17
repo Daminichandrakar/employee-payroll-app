@@ -39,6 +39,7 @@ public class EmployeePayrollBuilderTest {
         employeeDto.setDepartments(List.of("It"));
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
+        employeeDto.setStartDate(new Date());
 
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setName("Damini");
@@ -55,5 +56,6 @@ public class EmployeePayrollBuilderTest {
         assertEquals(employeeDto.getImagePath(), employeeEntity.getImagePath());
         assertEquals(employeeDto.getSalary(), employeeEntity.getSalary());
         assertEquals(employeeDto.getNotes(), employeeEntity.getNotes());
+        assertEquals(employeeDto.getStartDate(), employeeEntity.getStartDate());
     }
 }

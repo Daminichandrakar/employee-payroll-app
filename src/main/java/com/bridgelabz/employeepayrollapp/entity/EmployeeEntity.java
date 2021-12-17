@@ -25,14 +25,11 @@ public class EmployeeEntity {
     private String name;
     private double salary;
     private String gender;
-    @CreationTimestamp
     private Date startDate;
     @ElementCollection
-    @CollectionTable(name = "employee_department", joinColumns = @JoinColumn(name = "employee_id"))
+    @CollectionTable(name = "employee_department", joinColumns = @JoinColumn(name = "id"))
     private List<String> departments;
     private String notes;
     private String imagePath;
-
-
 }
 

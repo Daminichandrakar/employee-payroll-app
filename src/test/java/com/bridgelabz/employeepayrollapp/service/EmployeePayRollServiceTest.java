@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +33,7 @@ import static org.mockito.Mockito.*;
 public class EmployeePayRollServiceTest {
 
     @InjectMocks
-    private EmployeePayRollService employeePayRollService;
+    private IEmployeePayRollService employeePayRollService = new EmployeePayRollService();
     @Mock
     private EmployeeRepository employeeRepository;
     @Mock
@@ -70,6 +71,7 @@ public class EmployeePayRollServiceTest {
         employeeDto.setGender("F");
         employeeDto.setDepartments(List.of("It"));
         employeeDto.setSalary(15000);
+        employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
         employeeDtoList.add(employeeDto);
@@ -78,6 +80,7 @@ public class EmployeePayRollServiceTest {
         employeeDto2.setGender("M");
         employeeDto2.setDepartments(List.of("It"));
         employeeDto2.setSalary(15000);
+        employeeDto2.setStartDate(new Date());
         employeeDto2.setNotes("Welcome to Cse department");
         employeeDto2.setImagePath("a.jpg");
         employeeDtoList.add(employeeDto2);
@@ -107,6 +110,7 @@ public class EmployeePayRollServiceTest {
         employeeDto.setGender("F");
         employeeDto.setDepartments(List.of("It"));
         employeeDto.setSalary(15000);
+        employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
 
@@ -124,6 +128,7 @@ public class EmployeePayRollServiceTest {
         employeeDto.setGender("F");
         employeeDto.setDepartments(List.of("It"));
         employeeDto.setSalary(15000);
+        employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
 
@@ -158,6 +163,7 @@ public class EmployeePayRollServiceTest {
         employeeDto.setGender("F");
         employeeDto.setDepartments(List.of("It"));
         employeeDto.setSalary(15000);
+        employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
 
@@ -199,5 +205,12 @@ public class EmployeePayRollServiceTest {
         employeeEntity.setImagePath("a.jpg");
         when(employeeRepository.findById(id)).thenReturn(Optional.empty());
         assertThrows(EmployeeCustomException.class, () -> employeePayRollService.deleteEmployee(id));
+    }
+
+    @Test
+    void givenId_whenGetEmployeeByIdIsCalled_IfIdNotFound_shouldThrowExceptionMessage() {
+        int id = 1;
+        when(employeeRepository.findById(id)).thenReturn(Optional.empty());
+        assertThrows(EmployeeCustomException.class, () -> employeePayRollService.getEmployeeById(id));
     }
 }

@@ -46,7 +46,7 @@ public class EmployeePayRollController {
     /**
      * Purpose : To update employee into database.
      *
-     * @param id : given id which data we want to update in database
+     * @param id          : given id which data we want to update in database
      * @param employeeDto : input data to be updated into database.
      * @return String : success message "Employee Updated Successfully".
      */

@@ -20,14 +20,12 @@ import java.util.stream.Collectors;
  * @since : 15-12-2021
  */
 @Service
-public class EmployeePayRollService {
+public class EmployeePayRollService implements IEmployeePayRollService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
-
     @Autowired
     private ModelMapper modelMapper;
-
     @Autowired
     EmployeePayRollBuilder employeePayRollBuilder;
 
@@ -36,6 +34,7 @@ public class EmployeePayRollService {
      *
      * @return the list of all employee
      */
+    @Override
     public List<EmployeeDto> employeeList() {
         return employeeRepository.findAll().stream()
                 .map(employeeEntity -> modelMapper.map(employeeEntity, EmployeeDto.class))
@@ -48,7 +47,8 @@ public class EmployeePayRollService {
      * @param id : takes the employee id of that particular employee entity
      * @return the employee entity using the employee id
      */
-    private EmployeeEntity getEmployeeById(int id) {
+    @Override
+    public EmployeeEntity getEmployeeById(int id) {
         EmployeeEntity employeeEntity = employeeRepository.findById(id)
                 .orElseThrow(() -> new EmployeeCustomException(
                         "Invalid Employee Id -> " + id));
@@ -57,12 +57,13 @@ public class EmployeePayRollService {
 
     /**
      * Purpose : This method is used to add the employee details by using of
-     *           employeeDto.
+     * employeeDto.
      *
      * @param employeeDto : takes the employee details as DTO to provide the
      *                    repository for storing in database
      * @return String : Success message for adding data into database.
      */
+    @Override
     public String addEmployee(EmployeeDto employeeDto) {
         EmployeeEntity employeeEntity = modelMapper.map(employeeDto, EmployeeEntity.class);
         employeeRepository.save(employeeEntity);
@@ -71,13 +72,14 @@ public class EmployeePayRollService {
 
     /**
      * Purpose : This method is used to update the employee details by using their
-     *           respective employee id
+     * respective employee id
      *
-     * @param id : takes the employee id for updating that particular employee.
+     * @param id          : takes the employee id for updating that particular employee.
      * @param employeeDto : takes the updated employee details as DTO
-     *                     and update in database
+     *                    and update in database
      * @return String : Success message for updating data into database.
      */
+    @Override
     public String updateEmployee(int id, EmployeeDto employeeDto) {
         EmployeeEntity employeeEntity = getEmployeeById(id);
         employeePayRollBuilder.buildEmployeeEntity(employeeDto, employeeEntity);
@@ -91,6 +93,7 @@ public class EmployeePayRollService {
      * @param id : takes the employee id for deleting that particularly employee entity
      * @return String : Success message for deleting data into database.
      */
+    @Override
     public String deleteEmployee(int id) {
         EmployeeEntity employeeEntity = getEmployeeById(id);
         employeeRepository.delete(employeeEntity);
