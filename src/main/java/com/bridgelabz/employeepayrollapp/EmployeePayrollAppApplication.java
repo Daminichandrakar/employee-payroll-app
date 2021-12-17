@@ -7,7 +7,10 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class EmployeePayrollAppApplication {
-
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeePayrollAppApplication.class, args);
 	}
