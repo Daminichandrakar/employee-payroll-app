@@ -17,7 +17,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmployeePayRollBuilder {
 
-    private ModelMapper modelMapper = new ModelMapper();
+    @Autowired
+    private ModelMapper modelMapper;
 
     /**
      * Purpose : To convert employee dto into employee entity.
@@ -31,5 +32,3 @@ public class EmployeePayRollBuilder {
         return employeeEntity;
     }
 }
-
-

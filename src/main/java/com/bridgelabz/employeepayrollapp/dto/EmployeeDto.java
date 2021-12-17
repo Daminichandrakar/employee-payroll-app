@@ -3,10 +3,9 @@ package com.bridgelabz.employeepayrollapp.dto;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Purpose : To invoke the employee details from client
@@ -33,16 +32,11 @@ public class EmployeeDto {
     private String gender;
 
     @NotNull
-    private Date startDate;
+    @Size(max = 50 , message = "Department name should be in 50 character")
+    private List<String> departments;
 
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z]{2,}$", message = "Department should be start with capital latter " +
-            "& should contain more then 2 character ")
-    private String department;
-
-    @NotNull
-    @Pattern(regexp = "^[a-zA-Z]{1,}$", message = "Notes should be start with capital latter " +
-            "& should contain more then 3 character ")
+    @Size(max = 150 , message = "Notes should be in 150 character")
     private String notes;
 
     @NotNull

@@ -9,6 +9,13 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * Purpose : To configure swagger for employee payroll application
+ *
+ * @author : DAMINI CHANDRAKAR
+ * @version : 0.0.1-SNAPSHOT
+ * @since : 15-12-2021
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfiguration {

@@ -17,6 +17,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Purpose : Global Exception class.It handles the exceptions globally.
+ *
+ * @author : DAMINI CHANDRAKAR
+ * @version : 0.0.1-SNAPSHOT
+ * @since : 15-12-2021
+ */
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 

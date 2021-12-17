@@ -15,6 +15,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+/**
+ * Purpose : To invoke test cases for Employee payroll controller class.
+ *
+ * @author : DAMINI CHANDRAKAR
+ * @version : 0.0.1-SNAPSHOT
+ * @since : 15-12-2021
+ */
 @ExtendWith(MockitoExtension.class)
 public class EmployeePayrollControllerTest {
 
@@ -29,9 +36,8 @@ public class EmployeePayrollControllerTest {
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName("Damini");
         employeeDto.setGender("F");
-        employeeDto.setDepartment("It");
+        employeeDto.setDepartments(List.of("It"));
         employeeDto.setSalary(15000);
-        employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
         employeeList.add(employeeDto);
@@ -39,18 +45,18 @@ public class EmployeePayrollControllerTest {
         EmployeeDto employeeDto1 = new EmployeeDto();
         employeeDto1.setName("Siva");
         employeeDto1.setGender("M");
-        employeeDto1.setDepartment("It");
+        employeeDto1.setDepartments(List.of("It"));
         employeeDto1.setSalary(15000);
-        employeeDto1.setStartDate(new Date());
         employeeDto1.setImagePath("b.jpg");
         employeeDto1.setNotes("Welcome to it department");
         employeeList.add(employeeDto1);
 
         when(employeePayRollService.employeeList()).thenReturn(employeeList);
         List<EmployeeDto> actualResponse = employeePayRollController.getAll();
+        assertEquals(employeeList.size(),actualResponse.size());
         for (int i = 0; i < actualResponse.size(); i++) {
             assertEquals(employeeList.get(i).getName(), actualResponse.get(i).getName());
-            assertEquals(employeeList.get(i).getDepartment(), actualResponse.get(i).getDepartment());
+            assertEquals(employeeList.get(i).getDepartments(), actualResponse.get(i).getDepartments());
             assertEquals(employeeList.get(i).getGender(), actualResponse.get(i).getGender());
             assertEquals(employeeList.get(i).getNotes(), actualResponse.get(i).getNotes());
             assertEquals(employeeList.get(i).getSalary(), actualResponse.get(i).getSalary());
@@ -64,9 +70,8 @@ public class EmployeePayrollControllerTest {
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName("Damini");
         employeeDto.setGender("F");
-        employeeDto.setDepartment("It");
+       employeeDto.setDepartments(List.of("It"));
         employeeDto.setSalary(15000);
-        employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
         when(employeePayRollService.addEmployee(employeeDto)).thenReturn(successString);
@@ -81,9 +86,8 @@ public class EmployeePayrollControllerTest {
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName("Damini");
         employeeDto.setGender("F");
-        employeeDto.setDepartment("It");
+        employeeDto.setDepartments(List.of("It"));
         employeeDto.setSalary(15000);
-        employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
         when(employeePayRollService.updateEmployee(id ,employeeDto)).thenReturn(successString);

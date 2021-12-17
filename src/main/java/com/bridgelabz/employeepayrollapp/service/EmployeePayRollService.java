@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Purpose : To demonstrate business logic which implements all the methods in controller layer
- * for EmployeeDetailsDto Payroll Application
+ * Purpose : To demonstrate business logic for Employee Payroll Application
  *
  * @author : DAMINI CHANDRAKAR
  * @version : 0.0.1-SNAPSHOT
@@ -44,8 +43,7 @@ public class EmployeePayRollService {
     }
 
     /**
-     * Purpose : This method is used to get back the corresponding employee
-     * details by respective employee id
+     * Purpose : This method is used to get the employee details by respective employee id
      *
      * @param id : takes the employee id of that particular employee entity
      * @return the employee entity using the employee id
@@ -59,7 +57,7 @@ public class EmployeePayRollService {
 
     /**
      * Purpose : This method is used to add the employee details by using of
-     * employee DTO class
+     *           employeeDto.
      *
      * @param employeeDto : takes the employee details as DTO to provide the
      *                    repository for storing in database
@@ -75,9 +73,9 @@ public class EmployeePayRollService {
      * Purpose : This method is used to update the employee details by using their
      *           respective employee id
      *
-     * @param id : takes the employee id for updating that particular employee entity
+     * @param id : takes the employee id for updating that particular employee.
      * @param employeeDto : takes the updated employee details as DTO
-     *                    to provide the repository for storing in database
+     *                     and update in database
      * @return String : Success message for updating data into database.
      */
     public String updateEmployee(int id, EmployeeDto employeeDto) {
