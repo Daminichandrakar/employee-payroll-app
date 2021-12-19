@@ -5,6 +5,13 @@ import com.bridgelabz.employeepayrollapp.entity.EmployeeEntity;
 
 import java.util.List;
 
+/**
+ * Purpose : Create interface for employee payroll application
+ *
+ * @author : DAMINI CHANDRAKAR
+ * @version : 0.0.1-SNAPSHOT
+ * @since : 15-12-2021
+ */
 public interface IEmployeePayRollService {
 
     List<EmployeeDto> employeeList();
