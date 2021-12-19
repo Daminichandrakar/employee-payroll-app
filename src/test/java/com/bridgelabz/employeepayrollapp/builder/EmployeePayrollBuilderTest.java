@@ -49,13 +49,13 @@ public class EmployeePayrollBuilderTest {
         employeeEntity.setImagePath("a.jpg");
         employeeEntity.setNotes("Welcome to it department");
         employeeEntity.setStartDate(new Date());
-        employeeEntity = employeePayRollBuilder.buildEmployeeEntity(employeeDto, employeeEntity);
-        assertEquals(employeeDto.getName(), employeeEntity.getName());
-        assertEquals(employeeDto.getGender(), employeeEntity.getGender());
-        assertEquals(employeeDto.getDepartments(), employeeEntity.getDepartments());
-        assertEquals(employeeDto.getImagePath(), employeeEntity.getImagePath());
-        assertEquals(employeeDto.getSalary(), employeeEntity.getSalary());
-        assertEquals(employeeDto.getNotes(), employeeEntity.getNotes());
-        assertEquals(employeeDto.getStartDate(), employeeEntity.getStartDate());
+        EmployeeEntity employeeEntity1 = employeePayRollBuilder.buildEmployeeEntity(employeeDto, employeeEntity);
+        assertEquals(employeeDto.getName(), employeeEntity1.getName());
+        assertEquals(employeeDto.getGender(), employeeEntity1.getGender());
+        assertEquals(employeeDto.getDepartments(), employeeEntity1.getDepartments());
+        assertEquals(employeeDto.getImagePath(), employeeEntity1.getImagePath());
+        assertEquals(employeeDto.getSalary(), employeeEntity1.getSalary());
+        assertEquals(employeeDto.getNotes(), employeeEntity1.getNotes());
+        assertEquals(employeeDto.getStartDate(), employeeEntity1.getStartDate());
     }
 }

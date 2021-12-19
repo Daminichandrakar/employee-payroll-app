@@ -8,13 +8,21 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+/**
+ * Purpose : To demonstrate log file in employee payroll application
+ *
+ * @author : DAMINI CHANDRAKAR
+ * @version : 0.0.1-SNAPSHOT
+ * @since : 15-12-2021
+ */
 @Component
 @Aspect
 @Slf4j
 public class LogginAdviceAOP {
 
     /**
-     * Purpose : This method is created to implement the logging mechanism through out the application
+     * Purpose : PointCut to select all the methods available. So advice will be called
+     * for all the methods.
      */
     @Pointcut(value = "execution(* com.bridgelabz.employeepayrollapp.*.*.*(..) )")
     public void myPointCut() {
@@ -27,7 +35,7 @@ public class LogginAdviceAOP {
      * @return : The JSON format of logger statement before and after the advice
      * @throws Throwable : when there is any exception
      */
-    @Around("myPointCut()")
+    @Around("myPointCut()") //It is applied before and after calling the actual method.
     public Object applicationLogger(ProceedingJoinPoint point) throws Throwable {
         ObjectMapper mapper = new ObjectMapper();
         String methodName = point.getSignature().getName();

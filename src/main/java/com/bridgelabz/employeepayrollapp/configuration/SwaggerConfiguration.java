@@ -43,8 +43,8 @@ public class SwaggerConfiguration {
      * @return the swagger API information
      */
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Employee Payroll Service Application")
-                .description("Sample Documentation Generated Using SWAGGER2 for Employee Payroll Rest API")
+        return new ApiInfoBuilder().title("Employee Payroll Application")
+                .description("Employee Payroll Rest API")
                 .termsOfServiceUrl("https://github.com/Daminichandraka")
                 .license("License")
                 .licenseUrl("https://github.com/Daminichandraka")

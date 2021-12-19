@@ -79,7 +79,7 @@ public class EmployeePayRollControllerIT {
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
         int id = 1;
-        when(employeePayRollService.updateEmployee(id,employeeDto)).thenReturn("success");
+        when(employeePayRollService.updateEmployee(id, employeeDto)).thenReturn("success");
         mockMvc.perform(MockMvcRequestBuilders
                         .put("/employee/update/1")
                         .content("{\"name\": \"Damini\",\"salary\":15000,\"gender\": \"male\"," +

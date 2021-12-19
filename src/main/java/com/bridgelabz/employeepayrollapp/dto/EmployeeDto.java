@@ -28,7 +28,7 @@ public class EmployeeDto {
     @Pattern(regexp = "^(?:m|M|male|Male|f|F|female|Female|o|O|Other|other)$", message = "Please type gender F - female " +
             "M - male , O - others/Transgender")
     private String gender;
-    @NotNull(message = "YYYY-MM-DD")
+    @NotNull()
     @CreationTimestamp
     private Date startDate;
     @NotNull

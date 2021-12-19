@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
 public class EmployeePayRollService implements IEmployeePayRollService {
 
     @Autowired
+    IEmployeePayRollService iEmployeePayRollService;
+    @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
     private ModelMapper modelMapper;

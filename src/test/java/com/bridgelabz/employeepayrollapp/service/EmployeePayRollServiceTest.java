@@ -11,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,7 +32,7 @@ import static org.mockito.Mockito.*;
 public class EmployeePayRollServiceTest {
 
     @InjectMocks
-    private IEmployeePayRollService employeePayRollService = new EmployeePayRollService();
+    private EmployeePayRollService employeePayRollService;
     @Mock
     private EmployeeRepository employeeRepository;
     @Mock
@@ -212,5 +211,24 @@ public class EmployeePayRollServiceTest {
         int id = 1;
         when(employeeRepository.findById(id)).thenReturn(Optional.empty());
         assertThrows(EmployeeCustomException.class, () -> employeePayRollService.getEmployeeById(id));
+    }
+
+    @Test
+    void givenId_whenGetEmployeeByIdIsCalled_shouldReturnEmployee() {
+        int id = 1;
+        EmployeeEntity employeeEntity = new EmployeeEntity();
+        employeeEntity.setEmployeeId(1);
+        employeeEntity.setName("Damini");
+        employeeEntity.setGender("F");
+        employeeEntity.setDepartments(List.of("It"));
+        employeeEntity.setSalary(15000);
+        employeeEntity.setStartDate(new Date());
+        employeeEntity.setNotes("Welcome to it department");
+        employeeEntity.setImagePath("a.jpg");
+        when(employeeRepository.findById(id)).thenReturn(Optional.of(employeeEntity));
+        EmployeeEntity actualEntity = employeePayRollService.getEmployeeById(id);
+        assertEquals(actualEntity.getGender(), employeeEntity.getGender());
+        assertEquals(actualEntity.getName(), employeeEntity.getName());
+        assertEquals(actualEntity.getDepartments(), employeeEntity.getDepartments());
     }
 }
