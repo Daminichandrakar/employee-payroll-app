@@ -7,6 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,37 +56,39 @@ public class EmployeePayrollControllerTest {
         employeeList.add(employeeDto1);
 
         when(employeePayRollService.employeeList()).thenReturn(employeeList);
-        List<EmployeeDto> actualResponse = employeePayRollController.getAll();
-        assertEquals(employeeList.size(),actualResponse.size());
-        for (int i = 0; i < actualResponse.size(); i++) {
-            assertEquals(employeeList.get(i).getName(), actualResponse.get(i).getName());
-            assertEquals(employeeList.get(i).getDepartments(), actualResponse.get(i).getDepartments());
-            assertEquals(employeeList.get(i).getGender(), actualResponse.get(i).getGender());
-            assertEquals(employeeList.get(i).getNotes(), actualResponse.get(i).getNotes());
-            assertEquals(employeeList.get(i).getSalary(), actualResponse.get(i).getSalary());
-            assertEquals(employeeList.get(i).getImagePath(), actualResponse.get(i).getImagePath());
+        ResponseEntity<List<EmployeeDto>> actualResponse = employeePayRollController.getAll();
+        assertEquals(employeeList.size(), actualResponse.getBody().size());
+        for (int i = 0; i < actualResponse.getBody().size(); i++) {
+            assertEquals(employeeList.get(i).getName(), actualResponse.getBody().get(i).getName());
+            assertEquals(employeeList.get(i).getDepartments(), actualResponse.getBody().get(i).getDepartments());
+            assertEquals(employeeList.get(i).getGender(), actualResponse.getBody().get(i).getGender());
+            assertEquals(employeeList.get(i).getNotes(), actualResponse.getBody().get(i).getNotes());
+            assertEquals(employeeList.get(i).getSalary(), actualResponse.getBody().get(i).getSalary());
+            assertEquals(employeeList.get(i).getImagePath(), actualResponse.getBody().get(i).getImagePath());
         }
     }
 
-   @Test
+    @Test
     void givenEmployeeDto_whenCalledAddEmployeeMethod_shouldReturnSuccessMessage() {
         String successString = "Employee Added Successfully";
+        ResponseEntity<String> expectedResponseEntity = new ResponseEntity<>(successString, HttpStatus.OK);
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName("Damini");
         employeeDto.setGender("F");
-       employeeDto.setDepartments(List.of("It"));
+        employeeDto.setDepartments(List.of("It"));
         employeeDto.setSalary(15000);
         employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
         when(employeePayRollService.addEmployee(employeeDto)).thenReturn(successString);
-        String actualResponseString = employeePayRollController.add(employeeDto);
-        assertEquals(successString, actualResponseString);
+        ResponseEntity<String> actualResponseString = employeePayRollController.add(employeeDto);
+        assertEquals(expectedResponseEntity, actualResponseString);
     }
 
     @Test
     void givenEmployeeDto_whenCalledUpdateEmployeeMethod_shouldReturnSuccessMessage() {
         String successString = "Employee Update Successfully";
+        ResponseEntity<String> expectedResponseEntity = new ResponseEntity<>(successString, HttpStatus.OK);
         int id = 1;
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName("Damini");
@@ -94,17 +98,18 @@ public class EmployeePayrollControllerTest {
         employeeDto.setStartDate(new Date());
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
-        when(employeePayRollService.updateEmployee(id ,employeeDto)).thenReturn(successString);
-        String actualResponseString = employeePayRollController.update(1,employeeDto);
-        assertEquals(successString, actualResponseString);
+        when(employeePayRollService.updateEmployee(id, employeeDto)).thenReturn(successString);
+        ResponseEntity<String> actualResponseString = employeePayRollController.update(1, employeeDto);
+        assertEquals(expectedResponseEntity, actualResponseString);
     }
 
     @Test
     void givenId_whenCalledDeleteEmployeeMethod_shouldReturnSuccessMessage() {
         String successString = "Employee Delete Successfully";
+        ResponseEntity<String> expectedResponseEntity = new ResponseEntity<>(successString, HttpStatus.OK);
         int id = 1;
         when(employeePayRollService.deleteEmployee(id)).thenReturn(successString);
-        String actualResponseString = employeePayRollController.delete(id);
-        assertEquals(successString, actualResponseString);
+        ResponseEntity<String> actualResponseString = employeePayRollController.delete(id);
+        assertEquals(expectedResponseEntity, actualResponseString);
     }
 }

@@ -25,10 +25,10 @@ public class EmployeeDto {
     @Min(value = 10000, message = "Minimum wage should be more than 10000")
     private double salary;
     @NotNull
-    @Pattern(regexp = "^(?:m|M|male|Male|f|F|female|Female|o|O|Other|other)$", message = "Please type gender F - female " +
-            "M - male , O - others/Transgender")
+    @Pattern(regexp = "^(male|female|other)$", message = "Please type gender female ," +
+            "male ,others")
     private String gender;
-    @NotNull()
+    @NotNull
     @CreationTimestamp
     private Date startDate;
     @NotNull
@@ -37,6 +37,6 @@ public class EmployeeDto {
     @NotNull
     @Size(max = 150, message = "Notes should be in 150 character")
     private String notes;
-    @NotNull
+    @NotEmpty(message = "Image path can not be empty")
     private String imagePath;
 }

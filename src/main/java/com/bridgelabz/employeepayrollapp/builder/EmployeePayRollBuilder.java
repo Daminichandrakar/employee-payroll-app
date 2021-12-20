@@ -1,7 +1,7 @@
 package com.bridgelabz.employeepayrollapp.builder;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
-import com.bridgelabz.employeepayrollapp.entity.EmployeeEntity;
+import com.bridgelabz.employeepayrollapp.entity.Employee;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,12 +22,12 @@ public class EmployeePayRollBuilder {
     /**
      * Purpose : To convert employee dto into employee entity.
      *
-     * @param employeeDto    : employee dto which is to be converted.
-     * @param employeeEntity : employee entity which will be overwritten.
+     * @param employeeDto : employee dto which is to be converted.
+     * @param employee : employee entity which will be overwritten.
      * @return employeePayroll : converted employee entity
      */
-    public EmployeeEntity buildEmployeeEntity(EmployeeDto employeeDto, EmployeeEntity employeeEntity) {
-        modelMapper.map(employeeDto, employeeEntity);
-        return employeeEntity;
+    public Employee buildemployee(EmployeeDto employeeDto, Employee employee) {
+        modelMapper.map(employeeDto, employee);
+        return employee;
     }
 }

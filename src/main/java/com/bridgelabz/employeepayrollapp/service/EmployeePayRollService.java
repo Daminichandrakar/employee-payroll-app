@@ -2,7 +2,7 @@ package com.bridgelabz.employeepayrollapp.service;
 
 import com.bridgelabz.employeepayrollapp.builder.EmployeePayRollBuilder;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
-import com.bridgelabz.employeepayrollapp.entity.EmployeeEntity;
+import com.bridgelabz.employeepayrollapp.entity.Employee;
 import com.bridgelabz.employeepayrollapp.exception.EmployeeCustomException;
 import com.bridgelabz.employeepayrollapp.repository.EmployeeRepository;
 import org.modelmapper.ModelMapper;
@@ -23,13 +23,11 @@ import java.util.stream.Collectors;
 public class EmployeePayRollService implements IEmployeePayRollService {
 
     @Autowired
-    IEmployeePayRollService iEmployeePayRollService;
-    @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
-    EmployeePayRollBuilder employeePayRollBuilder;
+    private EmployeePayRollBuilder employeePayRollBuilder;
 
     /**
      * Purpose : This method is used to get back the list of employee details
@@ -39,7 +37,7 @@ public class EmployeePayRollService implements IEmployeePayRollService {
     @Override
     public List<EmployeeDto> employeeList() {
         return employeeRepository.findAll().stream()
-                .map(employeeEntity -> modelMapper.map(employeeEntity, EmployeeDto.class))
+                .map(employee -> modelMapper.map(employee, EmployeeDto.class))
                 .collect(Collectors.toList());
     }
 
@@ -50,11 +48,11 @@ public class EmployeePayRollService implements IEmployeePayRollService {
      * @return the employee entity using the employee id
      */
     @Override
-    public EmployeeEntity getEmployeeById(int id) {
-        EmployeeEntity employeeEntity = employeeRepository.findById(id)
+    public Employee getEmployeeById(int id) {
+        Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new EmployeeCustomException(
                         "Invalid Employee Id -> " + id));
-        return employeeEntity;
+        return employee;
     }
 
     /**
@@ -67,8 +65,8 @@ public class EmployeePayRollService implements IEmployeePayRollService {
      */
     @Override
     public String addEmployee(EmployeeDto employeeDto) {
-        EmployeeEntity employeeEntity = modelMapper.map(employeeDto, EmployeeEntity.class);
-        employeeRepository.save(employeeEntity);
+        Employee employee = modelMapper.map(employeeDto, Employee.class);
+        employeeRepository.save(employee);
         return "Employee Added Successfully";
     }
 
@@ -83,9 +81,9 @@ public class EmployeePayRollService implements IEmployeePayRollService {
      */
     @Override
     public String updateEmployee(int id, EmployeeDto employeeDto) {
-        EmployeeEntity employeeEntity = getEmployeeById(id);
-        employeePayRollBuilder.buildEmployeeEntity(employeeDto, employeeEntity);
-        employeeRepository.save(employeeEntity);
+        Employee employee = getEmployeeById(id);
+        employeePayRollBuilder.buildemployee(employeeDto, employee);
+        employeeRepository.save(employee);
         return "Employee Updated Successfully";
     }
 
@@ -97,8 +95,8 @@ public class EmployeePayRollService implements IEmployeePayRollService {
      */
     @Override
     public String deleteEmployee(int id) {
-        EmployeeEntity employeeEntity = getEmployeeById(id);
-        employeeRepository.delete(employeeEntity);
+        Employee employee = getEmployeeById(id);
+        employeeRepository.delete(employee);
         return "Employee Deleted Successfully";
     }
 }

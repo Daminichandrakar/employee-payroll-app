@@ -1,7 +1,7 @@
 package com.bridgelabz.employeepayrollapp.builder;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
-import com.bridgelabz.employeepayrollapp.entity.EmployeeEntity;
+import com.bridgelabz.employeepayrollapp.entity.Employee;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 /**
  * Purpose : To invoke test cases for Employee payroll builder class.
@@ -31,7 +30,7 @@ public class EmployeePayrollBuilderTest {
     private ModelMapper modelMapper;
 
     @Test
-    void givenEmployeeDto_whenNeedToCovertEmployeeDtoToEmployeeEntity_shouldReturnEmployeeEntity() {
+    void givenEmployeeDto_whenNeedToCovertEmployeeDtoToemployee_shouldReturnemployee() {
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName("Damini");
         employeeDto.setGender("F");
@@ -41,21 +40,21 @@ public class EmployeePayrollBuilderTest {
         employeeDto.setImagePath("a.jpg");
         employeeDto.setStartDate(new Date());
 
-        EmployeeEntity employeeEntity = new EmployeeEntity();
-        employeeEntity.setName("Damini");
-        employeeEntity.setGender("F");
-        employeeEntity.setDepartments(List.of("It"));
-        employeeEntity.setSalary(15000);
-        employeeEntity.setImagePath("a.jpg");
-        employeeEntity.setNotes("Welcome to it department");
-        employeeEntity.setStartDate(new Date());
-        EmployeeEntity employeeEntity1 = employeePayRollBuilder.buildEmployeeEntity(employeeDto, employeeEntity);
-        assertEquals(employeeDto.getName(), employeeEntity1.getName());
-        assertEquals(employeeDto.getGender(), employeeEntity1.getGender());
-        assertEquals(employeeDto.getDepartments(), employeeEntity1.getDepartments());
-        assertEquals(employeeDto.getImagePath(), employeeEntity1.getImagePath());
-        assertEquals(employeeDto.getSalary(), employeeEntity1.getSalary());
-        assertEquals(employeeDto.getNotes(), employeeEntity1.getNotes());
-        assertEquals(employeeDto.getStartDate(), employeeEntity1.getStartDate());
+        Employee employee = new Employee();
+        employee.setName("Damini");
+        employee.setGender("F");
+        employee.setDepartments(List.of("It"));
+        employee.setSalary(15000);
+        employee.setImagePath("a.jpg");
+        employee.setNotes("Welcome to it department");
+        employee.setStartDate(new Date());
+        Employee employee1 = employeePayRollBuilder.buildemployee(employeeDto, employee);
+        assertEquals(employeeDto.getName(), employee1.getName());
+        assertEquals(employeeDto.getGender(), employee1.getGender());
+        assertEquals(employeeDto.getDepartments(), employee1.getDepartments());
+        assertEquals(employeeDto.getImagePath(), employee1.getImagePath());
+        assertEquals(employeeDto.getSalary(), employee1.getSalary());
+        assertEquals(employeeDto.getNotes(), employee1.getNotes());
+        assertEquals(employeeDto.getStartDate(), employee1.getStartDate());
     }
 }

@@ -3,6 +3,8 @@ package com.bridgelabz.employeepayrollapp.controller;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
 import com.bridgelabz.employeepayrollapp.service.EmployeePayRollService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,8 +30,8 @@ public class EmployeePayRollController {
      * @return list of all employee's.
      */
     @GetMapping(value = "/get-all")
-    public List<EmployeeDto> getAll() {
-        return employeePayRollService.employeeList();
+    public ResponseEntity<List<EmployeeDto>> getAll() {
+        return new ResponseEntity<>(employeePayRollService.employeeList(), HttpStatus.OK);
     }
 
     /**
@@ -39,8 +41,8 @@ public class EmployeePayRollController {
      * @return String : success message "Employee Added Successfully".
      */
     @PostMapping(value = "/add")
-    public String add(@Valid @RequestBody EmployeeDto employeeDto) {
-        return employeePayRollService.addEmployee(employeeDto);
+    public ResponseEntity<String> add(@Valid @RequestBody EmployeeDto employeeDto) {
+        return new ResponseEntity<String>(employeePayRollService.addEmployee(employeeDto),HttpStatus.OK);
     }
 
     /**
@@ -51,8 +53,8 @@ public class EmployeePayRollController {
      * @return String : success message "Employee Updated Successfully".
      */
     @PutMapping(value = "/update/{id}")
-    public String update(@PathVariable(value = "id") int id, @Valid @RequestBody EmployeeDto employeeDto) {
-        return employeePayRollService.updateEmployee(id, employeeDto);
+    public ResponseEntity<String> update(@PathVariable(value = "id") int id, @Valid @RequestBody EmployeeDto employeeDto) {
+        return new ResponseEntity<String>(employeePayRollService.updateEmployee(id, employeeDto),HttpStatus.OK);
     }
 
     /**
@@ -62,7 +64,7 @@ public class EmployeePayRollController {
      * @return String : success message "Employee Deleted Successfully".
      */
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
-        return employeePayRollService.deleteEmployee(id);
+    public ResponseEntity<String> delete(@PathVariable int id) {
+        return new ResponseEntity<String>(employeePayRollService.deleteEmployee(id),HttpStatus.OK);
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "employee_payroll")
-public class EmployeeEntity {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")

@@ -76,7 +76,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
      * @return : response entity of object type and status
      */
     @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleAtmCustomException(EmployeeCustomException e) {
+    public ResponseEntity<ErrorResponse> handleEmployeeCustomException(EmployeeCustomException e) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
         errorResponse.setErrors(e.getMessage());

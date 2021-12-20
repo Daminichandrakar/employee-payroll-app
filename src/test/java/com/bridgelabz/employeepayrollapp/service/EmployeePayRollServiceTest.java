@@ -2,7 +2,7 @@ package com.bridgelabz.employeepayrollapp.service;
 
 import com.bridgelabz.employeepayrollapp.builder.EmployeePayRollBuilder;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
-import com.bridgelabz.employeepayrollapp.entity.EmployeeEntity;
+import com.bridgelabz.employeepayrollapp.entity.Employee;
 import com.bridgelabz.employeepayrollapp.exception.EmployeeCustomException;
 import com.bridgelabz.employeepayrollapp.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
@@ -36,33 +36,33 @@ public class EmployeePayRollServiceTest {
     @Mock
     private EmployeeRepository employeeRepository;
     @Mock
-    ModelMapper modelMapper;
+    private ModelMapper modelMapper;
     @Mock
-    EmployeePayRollBuilder employeePayRollBuilder;
+    private EmployeePayRollBuilder employeePayRollBuilder;
 
     @Test
     void whenGetAllEmployeeMethodIsCalled_ShouldReturnListOfemployeeDto() {
-        List<EmployeeEntity> employeeEntityList = new ArrayList<>();
-        EmployeeEntity employeeEntity = new EmployeeEntity();
-        employeeEntity.setEmployeeId(1);
-        employeeEntity.setName("Damini");
-        employeeEntity.setGender("F");
-        employeeEntity.setDepartments(List.of("It"));
-        employeeEntity.setSalary(15000);
-        employeeEntity.setStartDate(new Date());
-        employeeEntity.setNotes("Welcome to it department");
-        employeeEntity.setImagePath("a.jpg");
-        employeeEntityList.add(employeeEntity);
-        EmployeeEntity employeeEntity1 = new EmployeeEntity();
-        employeeEntity1.setEmployeeId(2);
-        employeeEntity1.setName("Damini");
-        employeeEntity1.setGender("F");
-        employeeEntity1.setDepartments(List.of("It"));
-        employeeEntity1.setSalary(15000);
-        employeeEntity1.setStartDate(new Date());
-        employeeEntity1.setNotes("Welcome to it department");
-        employeeEntity1.setImagePath("a.jpg");
-        employeeEntityList.add(employeeEntity1);
+        List<Employee> employeeList = new ArrayList<>();
+        Employee employee = new Employee();
+        employee.setEmployeeId(1);
+        employee.setName("Damini");
+        employee.setGender("F");
+        employee.setDepartments(List.of("It"));
+        employee.setSalary(15000);
+        employee.setStartDate(new Date());
+        employee.setNotes("Welcome to it department");
+        employee.setImagePath("a.jpg");
+        employeeList.add(employee);
+        Employee employee1 = new Employee();
+        employee1.setEmployeeId(2);
+        employee1.setName("Damini");
+        employee1.setGender("F");
+        employee1.setDepartments(List.of("It"));
+        employee1.setSalary(15000);
+        employee1.setStartDate(new Date());
+        employee1.setNotes("Welcome to it department");
+        employee1.setImagePath("a.jpg");
+        employeeList.add(employee1);
 
         List<EmployeeDto> employeeDtoList = new ArrayList<>();
         EmployeeDto employeeDto = new EmployeeDto();
@@ -84,9 +84,9 @@ public class EmployeePayRollServiceTest {
         employeeDto2.setImagePath("a.jpg");
         employeeDtoList.add(employeeDto2);
 
-        when(employeeRepository.findAll()).thenReturn(employeeEntityList);
-        when(modelMapper.map(employeeEntityList.get(0), EmployeeDto.class)).thenReturn(employeeDto);
-        when(modelMapper.map(employeeEntityList.get(1), EmployeeDto.class)).thenReturn(employeeDto2);
+        when(employeeRepository.findAll()).thenReturn(employeeList);
+        when(modelMapper.map(employeeList.get(0), EmployeeDto.class)).thenReturn(employeeDto);
+        when(modelMapper.map(employeeList.get(1), EmployeeDto.class)).thenReturn(employeeDto2);
         List<EmployeeDto> actualListOfEmployee = employeePayRollService.employeeList();
         assertEquals(2, actualListOfEmployee.size());
         assertEquals(employeeDtoList, actualListOfEmployee);
@@ -94,15 +94,15 @@ public class EmployeePayRollServiceTest {
 
     @Test
     void whenAddEmployeeCalled_shouldAddEmployeeAndGenerateSuccessMessage() {
-        EmployeeEntity employeeEntity = new EmployeeEntity();
-        employeeEntity.setEmployeeId(1);
-        employeeEntity.setName("Damini");
-        employeeEntity.setGender("F");
-        employeeEntity.setDepartments(List.of("It"));
-        employeeEntity.setSalary(15000);
-        employeeEntity.setStartDate(new Date());
-        employeeEntity.setNotes("Welcome to it department");
-        employeeEntity.setImagePath("a.jpg");
+        Employee employee = new Employee();
+        employee.setEmployeeId(1);
+        employee.setName("Damini");
+        employee.setGender("F");
+        employee.setDepartments(List.of("It"));
+        employee.setSalary(15000);
+        employee.setStartDate(new Date());
+        employee.setNotes("Welcome to it department");
+        employee.setImagePath("a.jpg");
 
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName("Damini");
@@ -113,10 +113,10 @@ public class EmployeePayRollServiceTest {
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
 
-        when(modelMapper.map(employeeDto, EmployeeEntity.class)).thenReturn(employeeEntity);
+        when(modelMapper.map(employeeDto, Employee.class)).thenReturn(employee);
         String actualStringMessage = employeePayRollService.addEmployee(employeeDto);
         assertEquals("Employee Added Successfully", actualStringMessage);
-        verify(employeeRepository, times(1)).save(employeeEntity);
+        verify(employeeRepository, times(1)).save(employee);
     }
 
     @Test
@@ -131,27 +131,27 @@ public class EmployeePayRollServiceTest {
         employeeDto.setNotes("Welcome to it department");
         employeeDto.setImagePath("a.jpg");
 
-        EmployeeEntity employeeEntity = new EmployeeEntity();
-        employeeEntity.setEmployeeId(1);
-        employeeEntity.setName("Damini");
-        employeeEntity.setGender("F");
+        Employee employee = new Employee();
+        employee.setEmployeeId(1);
+        employee.setName("Damini");
+        employee.setGender("F");
         employeeDto.setDepartments(List.of("It"));
-        employeeEntity.setSalary(15000);
-        employeeEntity.setStartDate(new Date());
-        employeeEntity.setNotes("Welcome to it department");
-        employeeEntity.setImagePath("a.jpg");
+        employee.setSalary(15000);
+        employee.setStartDate(new Date());
+        employee.setNotes("Welcome to it department");
+        employee.setImagePath("a.jpg");
 
-        when(employeeRepository.findById(id)).thenReturn(Optional.of(employeeEntity));
-        employeeEntity.setName(employeeDto.getName());
-        employeeEntity.setGender(employeeDto.getGender());
-        employeeEntity.setDepartments(employeeDto.getDepartments());
+        when(employeeRepository.findById(id)).thenReturn(Optional.of(employee));
+        employee.setName(employeeDto.getName());
+        employee.setGender(employeeDto.getGender());
+        employee.setDepartments(employeeDto.getDepartments());
 
-        when(employeePayRollBuilder.buildEmployeeEntity(employeeDto, employeeEntity)).
-                thenReturn(employeeEntity);
+        when(employeePayRollBuilder.buildemployee(employeeDto, employee)).
+                thenReturn(employee);
         String actualSuccessMessage = employeePayRollService.updateEmployee(id, employeeDto);
-        verify(employeeRepository, times(1)).save(employeeEntity);
+        verify(employeeRepository, times(1)).save(employee);
         assertEquals("Employee Updated Successfully", actualSuccessMessage);
-        assertEquals(employeeDto.getName(), employeeEntity.getName());
+        assertEquals(employeeDto.getName(), employee.getName());
     }
 
     @Test
@@ -174,34 +174,34 @@ public class EmployeePayRollServiceTest {
     @Test
     void givenDeleteEmployeeMethodIsCalledWithAnId_ShouldDeleteTheDataOfThatId() {
         int id = 1;
-        EmployeeEntity employeeEntity = new EmployeeEntity();
-        employeeEntity.setEmployeeId(1);
-        employeeEntity.setName("Damini");
-        employeeEntity.setGender("F");
-        employeeEntity.setDepartments(List.of("It"));
-        employeeEntity.setSalary(15000);
-        employeeEntity.setStartDate(new Date());
-        employeeEntity.setNotes("Welcome to it department");
-        employeeEntity.setImagePath("a.jpg");
+        Employee employee = new Employee();
+        employee.setEmployeeId(1);
+        employee.setName("Damini");
+        employee.setGender("F");
+        employee.setDepartments(List.of("It"));
+        employee.setSalary(15000);
+        employee.setStartDate(new Date());
+        employee.setNotes("Welcome to it department");
+        employee.setImagePath("a.jpg");
 
-        when(employeeRepository.findById(id)).thenReturn(Optional.of(employeeEntity));
+        when(employeeRepository.findById(id)).thenReturn(Optional.of(employee));
         String actualMessage = employeePayRollService.deleteEmployee(id);
         assertEquals("Employee Deleted Successfully", actualMessage);
-        verify(employeeRepository, times(1)).delete(employeeEntity);
+        verify(employeeRepository, times(1)).delete(employee);
     }
 
     @Test
     void whenDeleteEmployeeMethodIsCalled_IfIdNotFound_shouldThrowExceptionMessage() {
         int id = 1;
-        EmployeeEntity employeeEntity = new EmployeeEntity();
-        employeeEntity.setEmployeeId(1);
-        employeeEntity.setName("Damini");
-        employeeEntity.setGender("F");
-        employeeEntity.setDepartments(List.of("It"));
-        employeeEntity.setSalary(15000);
-        employeeEntity.setStartDate(new Date());
-        employeeEntity.setNotes("Welcome to it department");
-        employeeEntity.setImagePath("a.jpg");
+        Employee employee = new Employee();
+        employee.setEmployeeId(1);
+        employee.setName("Damini");
+        employee.setGender("F");
+        employee.setDepartments(List.of("It"));
+        employee.setSalary(15000);
+        employee.setStartDate(new Date());
+        employee.setNotes("Welcome to it department");
+        employee.setImagePath("a.jpg");
         when(employeeRepository.findById(id)).thenReturn(Optional.empty());
         assertThrows(EmployeeCustomException.class, () -> employeePayRollService.deleteEmployee(id));
     }
@@ -216,19 +216,19 @@ public class EmployeePayRollServiceTest {
     @Test
     void givenId_whenGetEmployeeByIdIsCalled_shouldReturnEmployee() {
         int id = 1;
-        EmployeeEntity employeeEntity = new EmployeeEntity();
-        employeeEntity.setEmployeeId(1);
-        employeeEntity.setName("Damini");
-        employeeEntity.setGender("F");
-        employeeEntity.setDepartments(List.of("It"));
-        employeeEntity.setSalary(15000);
-        employeeEntity.setStartDate(new Date());
-        employeeEntity.setNotes("Welcome to it department");
-        employeeEntity.setImagePath("a.jpg");
-        when(employeeRepository.findById(id)).thenReturn(Optional.of(employeeEntity));
-        EmployeeEntity actualEntity = employeePayRollService.getEmployeeById(id);
-        assertEquals(actualEntity.getGender(), employeeEntity.getGender());
-        assertEquals(actualEntity.getName(), employeeEntity.getName());
-        assertEquals(actualEntity.getDepartments(), employeeEntity.getDepartments());
+        Employee employee = new Employee();
+        employee.setEmployeeId(1);
+        employee.setName("Damini");
+        employee.setGender("F");
+        employee.setDepartments(List.of("It"));
+        employee.setSalary(15000);
+        employee.setStartDate(new Date());
+        employee.setNotes("Welcome to it department");
+        employee.setImagePath("a.jpg");
+        when(employeeRepository.findById(id)).thenReturn(Optional.of(employee));
+        Employee actualEntity = employeePayRollService.getEmployeeById(id);
+        assertEquals(actualEntity.getGender(), employee.getGender());
+        assertEquals(actualEntity.getName(), employee.getName());
+        assertEquals(actualEntity.getDepartments(), employee.getDepartments());
     }
 }

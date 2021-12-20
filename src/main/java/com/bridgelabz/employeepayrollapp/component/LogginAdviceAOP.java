@@ -35,17 +35,16 @@ public class LogginAdviceAOP {
      * @return : The JSON format of logger statement before and after the advice
      * @throws Throwable : when there is any exception
      */
-    @Around("myPointCut()") //It is applied before and after calling the actual method.
+    @Around("myPointCut()")
     public Object applicationLogger(ProceedingJoinPoint point) throws Throwable {
-        ObjectMapper mapper = new ObjectMapper();
         String methodName = point.getSignature().getName();
         String className = point.getTarget().getClass().toString();
         Object[] array = point.getArgs();
         log.info("method invoked" + className + " : " + methodName + "()" + "arguments : "
-                + mapper.writeValueAsString(array));
+                + array);
         Object object = point.proceed();
         log.info(className + " : " + methodName + "()" + "Response : "
-                + mapper.writeValueAsString(object));
+                + object);
         return object;
     }
 }
